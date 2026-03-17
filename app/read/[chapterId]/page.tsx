@@ -1,8 +1,8 @@
 export default function Page() {
   return (
     <div style={{ padding: "20px" }}>
-      <h1>Chapter Page</h1>
-      <p>Coming soon...</p>
+      <h1>Coming Soon</h1>
+      <p>This page is under construction.</p>
     </div>
   );
 }
