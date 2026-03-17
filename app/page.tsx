@@ -1,7 +1,12 @@
 export default function Home() {
   return (
     <main style={{ fontFamily: "Arial, sans-serif" }}>
-      
+    <nav style={{ padding: "15px", display: "flex", gap: "20px" }}>
+  <a href="/">Home</a>
+  <a href="/write">Write</a>
+  <a href="/login">Login</a>
+</nav>
+
       {/* HERO SECTION */}
       <section style={{
         height: "80vh",
