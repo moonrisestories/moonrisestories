@@ -81,8 +81,66 @@ export default function Home() {
           </div>
         </div>
       </section>
+{/* FEATURED NOVELS */}
+<section style={{
+  padding: "50px 20px",
+  background: "#f8fafc"
+}}>
+  <h2 style={{
+    textAlign: "center",
+    fontSize: "32px",
+    marginBottom: "30px"
+  }}>
+    Featured Stories
+  </h2>
 
-      {/* CALL TO ACTION */}
+  <div style={{
+    display: "flex",
+    justifyContent: "center",
+    gap: "20px",
+    flexWrap: "wrap"
+  }}>
+
+    {/* Novel Card 1 */}
+    <div style={{
+      width: "250px",
+      background: "white",
+      padding: "15px",
+      borderRadius: "10px",
+      boxShadow: "0 4px 10px rgba(0,0,0,0.1)"
+    }}>
+      <h3>🌙 The Alpha’s Forbidden Mate</h3>
+      <p>Dark romance between enemies bound by fate.</p>
+    </div>
+
+    {/* Novel Card 2 */}
+    <div style={{
+      width: "250px",
+      background: "white",
+      padding: "15px",
+      borderRadius: "10px",
+      boxShadow: "0 4px 10px rgba(0,0,0,0.1)"
+    }}>
+      <h3>🔥 Crown of the Forbidden Moon</h3>
+      <p>A queen, a curse, and a war under the moon.</p>
+    </div>
+
+    {/* Novel Card 3 */}
+    <div style={{
+      width: "250px",
+      background: "white",
+      padding: "15px",
+      borderRadius: "10px",
+      boxShadow: "0 4px 10px rgba(0,0,0,0.1)"
+    }}>
+      <h3>⚔️ Blood Oath Rejected</h3>
+      <p>She was rejected… but destiny chose her anyway.</p>
+    </div>
+
+  </div>
+</section>
+      
+ {/* CALL TO ACTION */}
       <section style={{
         padding: "50px 20px",
         background: "#0f172a",
