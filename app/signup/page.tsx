@@ -27,28 +27,47 @@ export default function SignupPage() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        background: "#0b0f2f",
+        color: "white",
       }}
     >
-      <div>
-        <h2>Signup</h2>
+      <div
+        style={{
+          background: "#12163a",
+          padding: "30px",
+          borderRadius: "10px",
+          width: "300px",
+          textAlign: "center",
+        }}
+      >
+        <h2>Create Account</h2>
 
         <input
           type="email"
           placeholder="Email"
           onChange={(e) => setEmail(e.target.value)}
+          style={{ width: "100%", padding: "10px", marginTop: "10px" }}
         />
-
-        <br /><br />
 
         <input
           type="password"
           placeholder="Password"
           onChange={(e) => setPassword(e.target.value)}
+          style={{ width: "100%", padding: "10px", marginTop: "10px" }}
         />
 
-        <br /><br />
-
-        <button onClick={handleSignup}>
+        <button
+          onClick={handleSignup}
+          style={{
+            width: "100%",
+            padding: "10px",
+            marginTop: "15px",
+            background: "#00c896",
+            border: "none",
+            color: "white",
+            cursor: "pointer",
+          }}
+        >
           Sign Up
         </button>
       </div>
