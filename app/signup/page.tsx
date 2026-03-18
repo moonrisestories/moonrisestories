@@ -1,4 +1,6 @@
 "use client";
+
+import { useState } from "react";
 import { supabase } from "@/lib/supabase";
 
 export default function SignupPage() {
@@ -7,8 +9,8 @@ export default function SignupPage() {
 
   const handleSignup = async () => {
     const { error } = await supabase.auth.signUp({
-      email,
-      password,
+      email: email,
+      password: password,
     });
 
     if (error) {
@@ -19,12 +21,14 @@ export default function SignupPage() {
   };
 
   return (
-    <main style={{
-      height: "100vh",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center"
-    }}>
+    <main
+      style={{
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <div>
         <h2>Signup</h2>
 
