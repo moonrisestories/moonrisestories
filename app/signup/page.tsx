@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { supabase } from "@/lib/supabase";
+import { supabase } from "../../lib/supabase";
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");
@@ -9,69 +9,38 @@ export default function SignupPage() {
 
   const handleSignup = async () => {
     const { error } = await supabase.auth.signUp({
-      email: email,
-      password: password,
+      email,
+      password,
     });
 
     if (error) {
       alert(error.message);
     } else {
-      alert("Signup successful! Check your email.");
+      alert("Signup successful!");
     }
   };
 
   return (
-    <main
-      style={{
-        height: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        background: "#0b0f2f",
-        color: "white",
-      }}
-    >
-      <div
-        style={{
-          background: "#12163a",
-          padding: "30px",
-          borderRadius: "10px",
-          width: "300px",
-          textAlign: "center",
-        }}
-      >
-        <h2>Create Account</h2>
+    <div style={{ padding: "40px" }}>
+      <h1>Signup Page</h1>
 
-        <input
-          type="email"
-          placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
-          style={{ width: "100%", padding: "10px", marginTop: "10px" }}
-        />
+      <input
+        type="email"
+        placeholder="Email"
+        onChange={(e) => setEmail(e.target.value)}
+      />
 
-        <input
-          type="password"
-          placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
-          style={{ width: "100%", padding: "10px", marginTop: "10px" }}
-        />
+      <br /><br />
 
-        <button
-          onClick={handleSignup}
-          style={{
-            width: "100%",
-            padding: "10px",
-            marginTop: "15px",
-            background: "#00c896",
-            border: "none",
-            color: "white",
-            cursor: "pointer",
-          }}
-        >
-          Sign Up
-        </button>
-      </div>
-    </main>
+      <input
+        type="password"
+        placeholder="Password"
+        onChange={(e) => setPassword(e.target.value)}
+      />
+
+      <br /><br />
+
+      <button onClick={handleSignup}>Sign Up</button>
+    </div>
   );
 }
-
