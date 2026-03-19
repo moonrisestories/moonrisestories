@@ -1,67 +1,58 @@
+"use client";
+
+import { useState } from "react";
+import { supabase } from "../../lib/supabase";
+import { useRouter } from "next/navigation";
+
 export default function LoginPage() {
+  const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) {
+      alert(error.message);
+      return;
+    }
+
+    alert("Login successful!");
+
+    // Redirect to dashboard
+    router.push("/dashboard");
+  };
+
   return (
-    <main style={{
-      height: "100vh",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      background: "#0f172a",
-      color: "white"
-    }}>
-      
-      <div style={{
-        width: "350px",
-        padding: "30px",
-        background: "#1e293b",
-        borderRadius: "10px"
-      }}>
-        
-        <h2 style={{ textAlign: "center", marginBottom: "20px" }}>
-          Login to MoonRiseStories
-        </h2>
+    <div style={{ textAlign: "center", marginTop: "100px" }}>
+      <h1>Login</h1>
 
-        <input
-          type="email"
-          placeholder="Email"
-          style={{
-            width: "100%",
-            padding: "10px",
-            marginBottom: "15px",
-            borderRadius: "5px",
-            border: "none"
-          }}
-        />
+      <input
+        type="email"
+        placeholder="Email"
+        onChange={(e) => setEmail(e.target.value)}
+        style={{ display: "block", margin: "10px auto", padding: "10px" }}
+      />
 
-        <input
-          type="password"
-          placeholder="Password"
-          style={{
-            width: "100%",
-            padding: "10px",
-            marginBottom: "20px",
-            borderRadius: "5px",
-            border: "none"
-          }}
-        />
+      <input
+        type="password"
+        placeholder="Password"
+        onChange={(e) => setPassword(e.target.value)}
+        style={{ display: "block", margin: "10px auto", padding: "10px" }}
+      />
 
-        <button style={{
-          width: "100%",
-          padding: "12px",
-          background: "#facc15",
-          border: "none",
-          borderRadius: "5px",
-          cursor: "pointer"
-        }}>
-          Login
-        </button>
-
-        <p style={{ marginTop: "15px", textAlign: "center" }}>
-          Don’t have an account? <a href="/signup" style={{ color: "#facc15" }}>Sign up</a>
-        </p>
-
-      </div>
-
-    </main>
+      <button
+        onClick={handleLogin}
+        style={{ padding: "10px 20px", marginTop: "10px" }}
+      >
+        Login
+      </button>
+    </div>
   );
 }
+
 
