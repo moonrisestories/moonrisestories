@@ -20,7 +20,28 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body>{children}</body>
-    </html>
-  );
+      <body>
+
+      <nav style={{ padding: "20px", borderBottom: "1px solid #ddd" }}>
+
+        <Link href="/" style={{ marginRight: "20px" }}>
+          Home
+        </Link>
+
+        <Link href="/discover" style={{ marginRight: "20px" }}>
+          Discover
+        </Link>
+
+        <Link href="/dashboard">
+          Dashboard
+        </Link>
+
+      </nav>
+
+      {children}
+
+    </body>
+  </html>
+);
+
 }

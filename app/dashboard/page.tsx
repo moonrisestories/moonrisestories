@@ -1,28 +1,31 @@
 "use client";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { supabase } from "../../lib/supabase";
+import Link from "next/link";
 
 export default function Dashboard() {
-  const router = useRouter();
-
-  useEffect(() => {
-    checkUser();
-  }, []);
-
-  async function checkUser() {
-    const { data } = await supabase.auth.getUser();
-
-    if (!data.user) {
-      router.push("/login");
-    }
-  }
 
   return (
-    <div style={{ textAlign: "center", marginTop: "100px" }}>
-      <h1>Dashboard</h1>
-      <p>You are logged in 🎉</p>
+    <div style={{ padding: "40px" }}>
+
+      <h1>Writer Dashboard</h1>
+      <p>Manage your novels and chapters.</p>
+
+      <div style={{ marginTop: "30px" }}>
+
+        <Link href="/write">
+          <button style={{ marginRight: "15px" }}>
+            Create Novel
+          </button>
+        </Link>
+
+        <Link href="/my-novels">
+          <button style={{ marginRight: "15px" }}>
+            My Novels
+          </button>
+        </Link>
+
+      </div>
+
     </div>
   );
 }
