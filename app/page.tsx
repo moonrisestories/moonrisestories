@@ -1,172 +1,25 @@
+"use client";
+
+import { useEffect } from "react";
+import { supabase } from "../lib/supabase";
+
 export default function Home() {
+  useEffect(() => {
+    checkUser();
+  }, []);
+
+  async function checkUser() {
+    const { data } = await supabase.auth.getUser();
+
+    if (data.user) {
+      window.location.replace("/dashboard");
+    }
+  }
+
   return (
-    <main style={{ fontFamily: "Arial, sans-serif" }}>
-    <nav style={{ padding: "15px", display: "flex", gap: "20px" }}>
-  <a href="/">Home</a>
-  <a href="/write">Write</a>
-  <a href="/login">Login</a>
-</nav>
-
-      {/* HERO SECTION */}
-      <section style={{
-        height: "80vh",
-        background: "linear-gradient(to right, #0f172a, #1e293b)",
-        color: "white",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        textAlign: "center",
-        flexDirection: "column",
-        padding: "20px"
-      }}>
-        <h1 style={{ fontSize: "48px", marginBottom: "10px" }}>
-          MoonRiseStories 🌙
-        </h1>
-        <p style={{ fontSize: "20px", maxWidth: "600px" }}>
-          Discover powerful stories, write your own legends, and build your audience.
-        </p>
-
-        <div style={{ marginTop: "20px" }}>
-          <a href="/write">
-            <button style={{
-              padding: "12px 25px",
-              marginRight: "10px",
-              background: "#facc15",
-              border: "none",
-              borderRadius: "8px",
-              cursor: "pointer"
-            }}>
-              Start Writing
-            </button>
-          </a>
-
-          <a href="/novel">
-            <button style={{
-              padding: "12px 25px",
-              background: "#334155",
-              color: "white",
-              border: "none",
-              borderRadius: "8px",
-              cursor: "pointer"
-            }}>
-              Explore Stories
-            </button>
-          </a>
-        </div>
-      </section>
-
-      {/* FEATURES SECTION */}
-      <section style={{
-        padding: "50px 20px",
-        textAlign: "center"
-      }}>
-        <h2 style={{ fontSize: "32px", marginBottom: "30px" }}>
-          Why MoonRiseStories?
-        </h2>
-
-        <div style={{
-          display: "flex",
-          justifyContent: "center",
-          gap: "30px",
-          flexWrap: "wrap"
-        }}>
-          <div>
-            <h3>📖 Write Freely</h3>
-            <p>Create and publish your own stories.</p>
-          </div>
-
-          <div>
-            <h3>🌍 Global Audience</h3>
-            <p>Reach readers from all over the world.</p>
-          </div>
-
-          <div>
-            <h3>💰 Earn Money</h3>
-            <p>Monetize your creativity (coming soon).</p>
-          </div>
-        </div>
-      </section>
-{/* FEATURED NOVELS */}
-<section style={{
-  padding: "50px 20px",
-  background: "#f8fafc"
-}}>
-  <h2 style={{
-    textAlign: "center",
-    fontSize: "32px",
-    marginBottom: "30px"
-  }}>
-    Featured Stories
-  </h2>
-
-  <div style={{
-    display: "flex",
-    justifyContent: "center",
-    gap: "20px",
-    flexWrap: "wrap"
-  }}>
-
-    {/* Novel Card 1 */}
-    <div style={{
-      width: "250px",
-      background: "white",
-      padding: "15px",
-      borderRadius: "10px",
-      boxShadow: "0 4px 10px rgba(0,0,0,0.1)"
-    }}>
-      <h3>🌙 The Alpha’s Forbidden Mate</h3>
-      <p>Dark romance between enemies bound by fate.</p>
+    <div style={{ textAlign: "center", marginTop: "100px" }}>
+      <h1>MoonRiseStories</h1>
+      <p>Welcome to the platform</p>
     </div>
-
-    {/* Novel Card 2 */}
-    <div style={{
-      width: "250px",
-      background: "white",
-      padding: "15px",
-      borderRadius: "10px",
-      boxShadow: "0 4px 10px rgba(0,0,0,0.1)"
-    }}>
-      <h3>🔥 Crown of the Forbidden Moon</h3>
-      <p>A queen, a curse, and a war under the moon.</p>
-    </div>
-
-    {/* Novel Card 3 */}
-    <div style={{
-      width: "250px",
-      background: "white",
-      padding: "15px",
-      borderRadius: "10px",
-      boxShadow: "0 4px 10px rgba(0,0,0,0.1)"
-    }}>
-      <h3>⚔️ Blood Oath Rejected</h3>
-      <p>She was rejected… but destiny chose her anyway.</p>
-    </div>
-
-  </div>
-</section>
-      
- {/* CALL TO ACTION */}
-      <section style={{
-        padding: "50px 20px",
-        background: "#0f172a",
-        color: "white",
-        textAlign: "center"
-      }}>
-        <h2>Start Your Writing Journey Today</h2>
-        <a href="/write">
-          <button style={{
-            marginTop: "20px",
-            padding: "12px 25px",
-            background: "#facc15",
-            border: "none",
-            borderRadius: "8px",
-            cursor: "pointer"
-          }}>
-            Get Started
-          </button>
-        </a>
-      </section>
-
-    </main>
   );
 }

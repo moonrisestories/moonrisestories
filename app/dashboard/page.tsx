@@ -1,9 +1,12 @@
 "use client";
 
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { supabase } from "../../lib/supabase";
 
 export default function Dashboard() {
+  const router = useRouter();
+
   useEffect(() => {
     checkUser();
   }, []);
@@ -12,7 +15,7 @@ export default function Dashboard() {
     const { data } = await supabase.auth.getUser();
 
     if (!data.user) {
-      window.location.href = "/login";
+      router.push("/login");
     }
   }
 
