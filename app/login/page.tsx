@@ -1,5 +1,5 @@
 async function handleLogin() {
-  alert("Button clicked"); // test
+  alert("Button clicked");
 
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
@@ -13,7 +13,10 @@ async function handleLogin() {
     return;
   }
 
-  alert("Login successful!");
-
-  window.location.href = "/dashboard";
+  if (data.user) {
+    alert("Login successful!");
+    window.location.href = "/dashboard";
+  } else {
+    alert("No user returned");
+  }
 }
