@@ -1,16 +1,19 @@
-"use client";
+async function handleLogin() {
+  alert("Button clicked"); // test
 
-export default function LoginPage() {
-  return (
-    <div style={{ textAlign: "center", marginTop: "100px" }}>
-      <h1 style={{ color: "red", fontSize: "40px" }}>
-        🚨 NEW LOGIN PAGE 🚨
-      </h1>
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
 
-      <button onClick={() => alert("NOW WORKING!!!")}>
-        CLICK TEST
-      </button>
-    </div>
-  );
+  console.log(data, error);
+
+  if (error) {
+    alert(error.message);
+    return;
+  }
+
+  alert("Login successful!");
+
+  window.location.href = "/dashboard";
 }
-
