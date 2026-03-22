@@ -1,84 +1,57 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
-import { supabase } from "../../lib/supabase";
-import Link from "next/link";
+import { useEffect, useState } from "react"
+import { supabase } from "@/lib/supabase/client"
+import { useRouter } from "next/navigation"
 
 export default function Dashboard() {
 
-  const [user, setUser] = useState<any>(null);
-  const [novels, setNovels] = useState<any[]>([]);
+  const router = useRouter()
+  const [email, setEmail] = useState("")
 
   useEffect(() => {
-    loadUser();
-    loadNovels();
-  }, []);
 
-  async function loadUser() {
-    const { data } = await supabase.auth.getUser();
-    setUser(data.user);
-  }
+    const getUser = async () => {
 
-  async function loadNovels() {
+      const { data } = await supabase.auth.getUser()
 
-    const { data } = await supabase
-      .from("novels")
-      .select("*")
-      .order("created_at", { ascending: false });
+      if (!data.user) {
+        router.push("/login")
+        return
+      }
 
-    setNovels(data || []);
+      setEmail(data.user.email || "")
+    }
+
+    getUser()
+
+  }, [])
+
+  const logout = async () => {
+
+    await supabase.auth.signOut()
+
+    router.push("/login")
+
   }
 
   return (
 
-    <div style={{ padding: "40px" }}>
+    <div style={{maxWidth:600, margin:"100px auto"}}>
 
-      <h1>Writer Dashboard</h1>
+      <h1>MoonRiseStories Dashboard</h1>
 
-      <p>Welcome to MoonRiseStories</p>
+      <p>Welcome:</p>
 
-      <br />
+      <b>{email}</b>
 
-      <Link href="/write">
-        <button style={{
-          padding: "10px 20px",
-          background: "#000",
-          color: "#fff",
-          border: "none",
-          cursor: "pointer"
-        }}>
-          Write New Novel
-        </button>
-      </Link>
+      <br/><br/>
 
-      <br /><br />
-
-      <h2>Your Novels</h2>
-
-      {novels.length === 0 && (
-        <p>No novels yet.</p>
-      )}
-
-      {novels.map((novel) => (
-
-        <div key={novel.id} style={{
-          border: "1px solid #ddd",
-          padding: "20px",
-          marginBottom: "20px"
-        }}>
-
-          <h3>{novel.title}</h3>
-
-          <p>{novel.description}</p>
-
-          <Link href={`/write/${novel.id}`}>
-            <button>Edit Chapters</button>
-          </Link>
-
-        </div>
-
-      ))}
+      <button onClick={logout}>
+        Logout
+      </button>
 
     </div>
-  );
+
+  )
 }

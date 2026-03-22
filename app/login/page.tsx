@@ -1,58 +1,72 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { supabase } from "../../lib/supabase";
+import { useState } from "react"
+import { supabase } from "@/lib/supabase/client"
+import { useRouter } from "next/navigation"
 
 export default function LoginPage() {
-  const router = useRouter();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const router = useRouter()
 
-  async function handleLogin() {
-    const { data, error } = await supabase.auth.signInWithPassword({
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [loading, setLoading] = useState(false)
+
+  const handleLogin = async (e:any) => {
+    e.preventDefault()
+
+    setLoading(true)
+
+    const { error } = await supabase.auth.signInWithPassword({
       email,
-      password,
-    });
+      password
+    })
 
-    console.log("LOGIN:", data, error);
+    setLoading(false)
 
     if (error) {
-      alert(error.message);
-      return;
+      alert(error.message)
+      return
     }
 
-    if (data.user) {
-      alert("Login successful ✅");
-      router.push("/dashboard");
-    }
+    router.push("/dashboard")
   }
 
   return (
-    <div style={{ textAlign: "center", marginTop: "100px" }}>
+
+    <div style={{maxWidth:400, margin:"100px auto"}}>
+
       <h1>Login</h1>
 
-      <input
-        type="email"
-        placeholder="Email"
-        onChange={(e) => setEmail(e.target.value)}
-        style={{ display: "block", margin: "10px auto", padding: "10px" }}
-      />
+      <form onSubmit={handleLogin}>
 
-      <input
-        type="password"
-        placeholder="Password"
-        onChange={(e) => setPassword(e.target.value)}
-        style={{ display: "block", margin: "10px auto", padding: "10px" }}
-      />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e)=>setEmail(e.target.value)}
+          required
+        />
 
-      <button
-        onClick={handleLogin}
-        style={{ padding: "10px 20px", marginTop: "10px" }}
-      >
-        Login
-      </button>
+        <br/><br/>
+
+        <input
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e)=>setPassword(e.target.value)}
+          required
+        />
+
+        <br/><br/>
+
+        <button type="submit">
+          {loading ? "Logging in..." : "Login"}
+        </button>
+
+      </form>
+
     </div>
-  );
+
+  )
 }
